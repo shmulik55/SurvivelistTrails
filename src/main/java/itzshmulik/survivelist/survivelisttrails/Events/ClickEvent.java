@@ -74,6 +74,8 @@ public class ClickEvent implements Listener {
 
             case 13:
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[Survivelist Trails] Removed your trail!"));
+                player.closeInventory();
+                player.updateInventory();
                 break;
             default:
                 break;
