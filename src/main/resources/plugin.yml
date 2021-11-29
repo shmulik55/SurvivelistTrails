@@ -1,0 +1,9 @@
+name: SurvivelistTrails
+version: '${project.version}'
+main: itzshmulik.survivelist.survivelisttrails.SurvivelistTrails
+api-version: 1.17
+authors: [ ItzShmulik ]
+description: Survivelist's Trails System
+commands:
+  trails:
+    description: Opens the trails GUI
