@@ -72,35 +72,11 @@ public class ClickEvent implements Listener {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cYou have no permission to use that command!"));
                 }
 
-             // This is where i have the problem, so i disabled it.
-            /* case 13:
-                if(particle.hasID()){
-                    particle.endTask();
-                    particle.removeID();
-                    player.closeInventory();
-                    player.updateInventory();
+            case 13:
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[Survivelist Trails] Removed your trail!"));
-                }else{
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[Survivelist Trails] You have no trails equipped"))
-                    player.closeInventory();
-                    player.updateInventory();
-                }
-                break; */
+                break;
             default:
                 break;
-        }
-    }
-
-    public void joinEvent(PlayerJoinEvent event) {
-        Player player = (Player) event.getPlayer();
-        ParticleData particle = new ParticleData(player.getUniqueId());
-        if(particle.hasID()){
-            particle.endTask();
-            particle.removeID();
-        }else{
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c[Survivelist Trails] You didn't have any trail equiped!"));
-            player.closeInventory();
-            player.updateInventory();
         }
     }
 }
