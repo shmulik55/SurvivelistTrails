@@ -28,13 +28,12 @@ public enum Trail implements ManagedTrail, Listener {
         public boolean addFor(Player player, boolean force) {
             synchronized (runnableTrails) {
                 final RunnableBasedTrail oldTrail = runnableTrails.get(player.getUniqueId());
-                if (force) {
-                    if (oldTrail == null) return false;
+                if (force && oldTrail != null) {
                     oldTrail.cancel();
                 }
                 runnableTrails.put(player.getUniqueId(), new RunnableBasedTrail(particle, player).start());
+                return oldTrail == null || !force;
             }
-            return true;
         }
 
         @Override
@@ -56,13 +55,12 @@ public enum Trail implements ManagedTrail, Listener {
         public boolean addFor(Player player, boolean force) {
             synchronized (runnableTrails) {
                 final RunnableBasedTrail oldTrail = runnableTrails.get(player.getUniqueId());
-                if (force) {
-                    if (oldTrail == null) return false;
+                if (force && oldTrail != null) {
                     oldTrail.cancel();
                 }
                 runnableTrails.put(player.getUniqueId(), new RunnableBasedTrail(particle, player).start());
+                return oldTrail == null || !force;
             }
-            return true;
         }
 
         @Override
@@ -104,8 +102,10 @@ public enum Trail implements ManagedTrail, Listener {
             final Location to = e.getTo();
             // skip view-only movements
             if (to != null && from.toVector().equals(to.toVector())) return;
+//            System.out.println("MOVE EVENT " + e);
             // only target players in hashset
             if (!activeTrails.contains(e.getPlayer().getUniqueId())) return;
+//            System.out.println("ACTIVE TARGET " + e.getPlayer() + " Sending loc");
             // immediately send location to async calculation
             processAsync(e.getPlayer().getLocation(), particle);
         }
