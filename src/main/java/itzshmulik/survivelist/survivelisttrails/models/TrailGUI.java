@@ -59,9 +59,12 @@ public class TrailGUI implements Listener {
             final Player player = (Player) event.getWhoClicked();
             if (player.hasPermission("trails.totem")) {
                 //trails.startTotem
-                Trail.TOTEM.addFor(player, false);
-                // Messages can be processed async just fine
-                messageTrailEquipped(player);
+                if (Trail.TOTEM.addFor(player, true)) {
+                    // Messages can be processed async just fine
+                    messageTrailEquipped(player);
+                } else {
+                    messageTrailAlreadyEquippedReinitialize(player);
+                }
             } else {
                 messageNoPermission(player);
             }
@@ -82,8 +85,11 @@ public class TrailGUI implements Listener {
             final Player player = (Player) event.getWhoClicked();
             if (player.hasPermission("trails.fire")) {
                 //trails.startFire
-                Trail.FIRE.addFor(player, false);
-                messageTrailEquipped(player);
+                if (Trail.FIRE.addFor(player, true)) {
+                    messageTrailEquipped(player);
+                } else {
+                    messageTrailAlreadyEquippedReinitialize(player);
+                }
             } else {
                 messageNoPermission(player);
             }
@@ -102,7 +108,11 @@ public class TrailGUI implements Listener {
             final Player player = (Player) event.getWhoClicked();
             if (player.hasPermission("trails.snowball")) {
                 //particle.setID(1)
-                messageTrailEquipped(player);
+                if (Trail.CHRISTMAS_2021.addFor(player, false)) {
+                    messageTrailEquipped(player);
+                } else {
+                    messageTrailAlreadyEquipped(player);
+                }
             } else {
                 messageNoPermission(player);
             }
@@ -131,9 +141,9 @@ public class TrailGUI implements Listener {
                 }
             }
             if (multipleEnded) {
-                sendMessageAsync(player, "&c[Survivelist Trails] Removed your trails!");
+                sendMessageAsync(player, "&c&l[Survivelist Trails] &cRemoved your trails!");
             } else if (ended) {
-                sendMessageAsync(player, "&c[Survivelist Trails] Removed your trail!");
+                sendMessageAsync(player, "&c&l[Survivelist Trails] &cRemoved your trail!");
             }
             Bukkit.getScheduler().runTask(javaPlugin, player::closeInventory);
         }
@@ -145,6 +155,14 @@ public class TrailGUI implements Listener {
 
     void messageTrailEquipped(Player player) {
         sendMessageAsync(player, "&a&l[Survivelist Trails] Trail equipped!");
+    }
+
+    void messageTrailAlreadyEquipped(Player player) {
+        sendMessageAsync(player, "&a&l[Survivelist Trails] &cThis trail is already equipped.");
+    }
+
+    void messageTrailAlreadyEquippedReinitialize(Player player) {
+        sendMessageAsync(player, "&a&l[Survivelist Trails] &cThis trail is already equipped; reinitializing.");
     }
 
     void messageNoPermission(Player player) {
