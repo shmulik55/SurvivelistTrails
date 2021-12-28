@@ -6,7 +6,7 @@
 
     <groupId>ItzShmulik.Survivelist</groupId>
     <artifactId>SurvivelistTrails</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>SurvivelistTrails</name>
@@ -38,13 +38,14 @@
                             <artifact>*:templates</artifact>
                             <excludes>
                                 <exclude>META-INF/MANIFEST.MF</exclude>
+                                <exclude>examples.yml</exclude>
                             </excludes>
                         </filter>
                     </filters>
                     <relocations>
                         <relocation>
                             <pattern>com.github.sanctum.templates</pattern>
-                            <shadedPattern>survivelisttrails.lib.templates</shadedPattern>
+                            <shadedPattern>itzshmulik.survivelist.survivelisttrails.lib.templates</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -85,7 +86,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.17.1-R0.1-SNAPSHOT</version>
+            <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -97,7 +98,7 @@
         <dependency>
             <groupId>com.github.the-h-team</groupId>
             <artifactId>templates</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
     </dependencies>
 </project>
