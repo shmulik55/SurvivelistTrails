@@ -20,7 +20,7 @@ public class TrailGUI implements Listener {
     static final int SIZE = 18;
     static final String TITLE = translate("&a&lTrails");
     final JavaPlugin javaPlugin;
-    final Template cancelTrailButton = new Template.Builder().setName(translate("&c&lRemove trail")).build();
+    final Template cancelTrailButton = Template.builder().setName("&c&lRemove trail").build();
     final HashMap<Integer, Button> buttons = new HashMap<>();
     final Inventory inv;
 

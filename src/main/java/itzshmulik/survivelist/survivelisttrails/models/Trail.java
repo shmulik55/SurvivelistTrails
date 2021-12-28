@@ -18,10 +18,8 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static itzshmulik.survivelist.survivelisttrails.util.Util.translate;
-
 public enum Trail implements ManagedTrail, Listener {
-    TOTEM(translate("&eTotem"), Particle.TOTEM) {
+    TOTEM("&eTotem", Particle.TOTEM) {
         final HashMap<UUID, RunnableBasedTrail> runnableTrails = new HashMap<>();
 
         @Override
@@ -48,7 +46,7 @@ public enum Trail implements ManagedTrail, Listener {
             return false;
         }
     },
-    FIRE(translate("&cFire"), Particle.FLAME) {
+    FIRE("&cFire", Particle.FLAME) {
         final HashMap<UUID, RunnableBasedTrail> runnableTrails = new HashMap<>();
 
         @Override
@@ -75,7 +73,7 @@ public enum Trail implements ManagedTrail, Listener {
             return false;
         }
     },
-    CHRISTMAS_2021(translate("&f&lSnowball (Christmas 2021 special)"), Particle.SNOWBALL) {
+    CHRISTMAS_2021("&f&lSnowball (Christmas 2021 special)", Particle.SNOWBALL) {
         final HashSet<UUID> activeTrails = new HashSet<>();
         final AtomicReference<JavaPlugin> plugin = new AtomicReference<>();
 
@@ -147,7 +145,7 @@ public enum Trail implements ManagedTrail, Listener {
 
     Trail(String name, Particle particle) {
         this.name = name;
-        this.template = new Template.Builder().setName(name).build();
+        this.template = Template.builder().setName(name).build();
         this.particle = particle;
     }
 }
